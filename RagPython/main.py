@@ -5,9 +5,13 @@ from llama_index.llms.openai import OpenAI # Going to answer our questions
 from llama_index.embeddings.openai import OpenAIEmbedding # takes our queries and wikepedia articles and embed them into vector space
 from llama_index.readers.wikipedia import WikipediaReader # for the text of the articles
 from llama_index.core import VectorStoreIndex, StorageContext, load_index_from_storage # Out vector storage 
+# vector one stores the document
+# storagecontext helps in saving/loading data
+# last one loads previously save vector data
 
 load_dotenv() # loads our env file from .env
 
+# our folder and articles whose data should be loaded
 INDEX_DIR = "wiki_rag"
 PAGES = [
     "Goldfish",
@@ -32,9 +36,9 @@ def get_index(): # gets the info in need if already saved
     
     # If not saved....gets the info from wikiepdia
     docs = WikipediaReader().load_data(pages = PAGES, auto_suggest= False)
-    embedding_model = OpenAIEmbedding(model="text-embedding-3-small")
+    embedding_model = OpenAIEmbedding(model="text-embedding-3-small") # converts into enbedding
     index = VectorStoreIndex.from_documents(docs, embedding_model = embedding_model)
-    index.storage_context.persist(persist_dir= INDEX_DIR)
+    index.storage_context.persist(persist_dir= INDEX_DIR) # saves it
     return index
 
 @st.cache_resource
@@ -43,7 +47,7 @@ def get_query_engine():
 
     llm = OpenAI(model = "gpt-3.5-turbo", temperature=0)
 
-    return index.as_query_engine(llm = llm, similarity_top_k = 1)
+    return index.as_query_engine(llm = llm, similarity_top_k = 1) # combines llm and index
 
 def main():
     st.title('Wikipedia RAG Application')
