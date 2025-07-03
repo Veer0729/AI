@@ -7,34 +7,34 @@ const client = new SarvamAIClient({
 });
 
 // Changing text
-const respone4 = await client.text.translate({
-    input: "Hi my name is veer",
-    source_language_code: "auto",
-    target_language_code: "hi-IN",
-    speaker_gender: "Male"
-});
-console.log(respone4)
+// const respone4 = await client.text.translate({
+//     input: "Hi my name is veer",
+//     source_language_code: "auto",
+//     target_language_code: "hi-IN",
+//     speaker_gender: "Male"
+// });
+// console.log(respone4)
 
 // Talking to LLM    
 const response3 = await client.chat.completions({
     messages: [
-        {role: "user", content: "give me some unknown facts about our country"}
+        {role: "user", content: "tell me about some student schemes by the gov?"}
     ]
 });
 console.log(response3.choices[0].message.content);
 
-// text to speech
-const response2 = await client.textToSpeech.convert({
-    text: "hey my name is veer",
-    target_language_code: "hi-IN",
-});
-console.log(response2)
+// // text to speech
+// const response2 = await client.textToSpeech.convert({
+//     text: "hey my name is veer",
+//     target_language_code: "hi-IN",
+// });
+// console.log(response2)
 
-// Text Translation
-const response = await client.text.translate({
-    input: "Hello, how are you?",
-    source_language_code: "auto",
-    target_language_code: "hi-IN",
-    speaker_gender: "Male"
-});
-console.log(response);
+// // Text Translation
+// const response = await client.text.translate({
+//     input: "Hello, how are you?",
+//     source_language_code: "auto",
+//     target_language_code: "hi-IN",
+//     speaker_gender: "Male"
+// });
+// console.log(response);

@@ -1,0 +1,7 @@
+python-dotenv
+pydantic
+langchain
+langchain-core
+langchain-community
+langchain-groq
+google-search-results
